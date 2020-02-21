@@ -56,7 +56,7 @@ def play_game(user, ai):
     else:
         overall_winner = ai
         print(f"{overall_winner} wins the game!")
-        
+
 
 def check_for_winning_throw(ai, roll_1, roll_2, user):
     # Who wins?
@@ -83,12 +83,18 @@ def check_for_winning_throw(ai, roll_1, roll_2, user):
 
 
 def get_rolls(player_name, rolls):  # rolls from list
-    roll = input(f"{player_name}, what is your roll? [rock, paper, or scissors]: ")
-    roll = roll.lower().strip()
-    if roll not in rolls:  # if roll_1 is not in the list
-        print(f"Sorry {player_name}, {roll} is not a valid play!")
+    # have user press 1,2,3 for R, P, S
+    for index, r in enumerate(rolls,start=1):
+        print(f"{index}.{r}")
 
-    return roll  # returning what user has provided
+    text = (input(f"{player_name}, what is your roll? [rock, paper, or scissors]: "))
+    selected_index = int(text) - 1
+
+    if selected_index < 0 or selected_index >= len(rolls):  # if roll_1 is not in the list
+        print(f"Sorry {player_name}, {selected_index} is not a valid play!")
+        return None
+
+    return rolls[selected_index]  # returning what user has provided
 
 
 if __name__ == '__main__':
